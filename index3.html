@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<div id = "chatlog"> </div>
+<input type="button" name="send", id= 'send'>
+<input type="text" id="message">
+<script type="text/javascript">
+  var ws = new WebSocket('ws://localhost:80', 'echo-protocol')
+  document.getElementById("send").addEventListener('click',function sendMessage(){
+    var message = document.getElementById('message').value;
+    ws.send("hello " + 53);
+  })
+  ws.addEventListener("message", function(e){
+    msg = e.data
+    arrStr = msg.split(" ")
+    if (arrStr[1]== "53" && arrStr[0] == "null"){
+    document.getElementById('chatlog').innerHTML += '<br>' + msg  
+    }
+    
+  })
+
+</script>
+
+</body>
+</html>
